@@ -6,25 +6,27 @@ pipeline
         stage('git clone') {
             steps {
                 echo 'git cloning...'
-                // clone file from git hub
-                git clone https://github.com/rakeshyadav1289/dummy.git
+                // Add your build commands here
+                git branch: 'main', url: 'https://github.com/rakeshyadav1289/dummy.git'
+
             }
         }
-        stage('building image') {
+        stage('build') {
             steps {
-                echo 'building docker image.....'
-                // build the docker images
-                docker build -t python-app .
+                echo 'building...'
+                // Add your build commands here
+                sh 'docker build -t myapp:latest .'
+
             }
         }
         stage('runing image...') {
             steps {
                 echo 'Deploying...'
-                // runing docker image
-                docker run --rm python-app
-              // list of docker images
-                docker images
+                // Add your deploy commands here
+                sh 'docker run --rm myapp'
+                sh 'docker images'
             }
         }
+        
     }
 }
